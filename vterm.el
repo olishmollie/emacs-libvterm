@@ -295,6 +295,8 @@ If nil, never delay")
 (define-key vterm-mode-map (kbd "C-/")                 #'vterm-undo)
 (define-key vterm-mode-map (kbd "M-.")                 #'vterm-send-meta-dot)
 (define-key vterm-mode-map (kbd "M-,")                 #'vterm-send-meta-comma)
+(define-key vterm-mode-map (kbd "M-b")                 #'vterm-send-meta-b)
+(define-key vterm-mode-map (kbd "M-f")                 #'vterm-send-meta-f)
 (define-key vterm-mode-map (kbd "C-c C-y")             #'vterm--self-insert)
 (define-key vterm-mode-map (kbd "C-c C-c")             #'vterm-send-ctrl-c)
 (define-key vterm-mode-map [remap self-insert-command] #'vterm--self-insert)
@@ -423,6 +425,18 @@ If nil, never delay")
   "Sends `M-,' to the libvterm."
   (interactive)
   (vterm-send-key "," nil t))
+
+(defun vterm-send-meta-b()
+  "Sends `M-b' to the libvterm and invokes `backward-word'."
+  (interactive)
+  (vterm-send-key "b" nil t)
+  (backward-word))
+
+(defun vterm-send-meta-f()
+  "Sends `M-f' to the libvterm and invokes `forward-word'."
+  (interactive)
+  (vterm-send-key "f" nil t)
+  (forward-word))
 
 (defun vterm-send-ctrl-c ()
   "Sends `C-c' to the libvterm."
